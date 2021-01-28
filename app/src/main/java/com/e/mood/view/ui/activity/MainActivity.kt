@@ -2,13 +2,17 @@ package com.e.mood.view.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
+import android.view.MenuItem
+import android.view.Window
+import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.e.mood.R
 import com.e.mood.databinding.ActivityMainBinding
 import com.e.mood.view.ui.fragment.*
+import com.e.mood.view.ui.util.Pager
+import com.e.mood.view.ui.util.ViewPagerAdapter
 import com.e.mood.viewmodel.MainActivityViewModel
 import com.e.mood.viewmodel.ViewModelProviderFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -36,6 +40,88 @@ class MainActivity : AppCompatActivity() {
         fragmentList.add(ShopBoxFragment())
         fragmentList.add(ProfileFragment())
 
+        var window: Window = window
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+
+        window.statusBarColor = ContextCompat.getColor(applicationContext, R.color.top_bar_color)
+
+        val pager: Pager = findViewById(R.id.pager)
+        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager, fragmentList)
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, HomeFragment())
+                .commit()
+
+        bottomNavView.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener{
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+                var selectedFragment: Fragment? = null
+
+                when(item.itemId){
+                    R.id.bottom_item_home -> {
+                        selectedFragment = HomeFragment()
+                        supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, selectedFragment)
+                                .commit()
+
+                        item.setChecked(true)
+                    }
+
+                    R.id.bottom_item_catalog -> {
+                        selectedFragment = CatalogFragment()
+                        supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, selectedFragment)
+                                .commit()
+
+                        item.setChecked(true)
+                    }
+
+                    R.id.bottom_item_bookmark -> {
+                        selectedFragment = BookmarkFragment()
+                        supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, selectedFragment)
+                                .disallowAddToBackStack()
+                                .commit()
+
+                        item.setChecked(true)
+                    }
+
+                    R.id.bottom_item_shop_box -> {
+                        selectedFragment = ShopBoxFragment()
+                        supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, selectedFragment)
+                                .disallowAddToBackStack()
+                                .commit()
+
+                        item.setChecked(true)
+                    }
+
+                    R.id.bottom_item_profile -> {
+                        selectedFragment = ProfileFragment()
+                        supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, selectedFragment)
+                                .disallowAddToBackStack()
+                                .commit()
+
+                        item.setChecked(true)
+                    }
+                }
+
+                return false
+            }
+        })
 
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        finish()
+    }
+
 }
