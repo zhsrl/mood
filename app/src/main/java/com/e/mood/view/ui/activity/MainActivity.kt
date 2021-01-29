@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.mood.R
-import com.e.mood.databinding.ActivityMainBinding
 import com.e.mood.view.ui.fragment.*
 import com.e.mood.view.ui.util.Pager
 import com.e.mood.view.ui.util.ViewPagerAdapter

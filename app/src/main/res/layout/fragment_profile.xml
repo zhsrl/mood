@@ -109,7 +109,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Я не помню пароль"
         android:textColor="@color/main_color"
         android:textSize="16sp"
@@ -117,7 +117,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
+        android:id="@+id/BTN_profile_sign_in"
         android:layout_width="360dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
@@ -131,7 +131,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/TV_create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -139,8 +139,8 @@
         android:text="Создайте аккаунт"
         android:textColor="@color/main_color"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintStart_toStartOf="@+id/BTN_profile_sign_in"
+        app:layout_constraintTop_toBottomOf="@+id/BTN_profile_sign_in" />
 
     <TextView
         android:id="@+id/textView7"
@@ -149,8 +149,37 @@
         android:layout_marginStart="4dp"
         android:text="или войдите через соцсети"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        app:layout_constraintStart_toEndOf="@+id/TV_create_account"
+        app:layout_constraintTop_toTopOf="@+id/TV_create_account" />
 
+    <ImageView
+        android:id="@+id/IV_google"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/google"
+        app:layout_constraintStart_toStartOf="@+id/TV_create_account"
+        app:layout_constraintTop_toBottomOf="@+id/TV_create_account" />
+
+    <ImageView
+        android:id="@+id/IV_facebook"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/facebook"
+        app:layout_constraintBottom_toBottomOf="@+id/IV_google"
+        app:layout_constraintStart_toEndOf="@+id/IV_google"
+        app:layout_constraintTop_toTopOf="@+id/IV_google" />
+
+    <ImageView
+        android:id="@+id/IV_twitter"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/twitter"
+        app:layout_constraintBottom_toBottomOf="@+id/IV_facebook"
+        app:layout_constraintStart_toEndOf="@+id/IV_facebook"
+        app:layout_constraintTop_toTopOf="@+id/IV_facebook" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

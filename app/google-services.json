@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "17948768002",
+    "project_id": "moodshop-aa209",
+    "storage_bucket": "moodshop-aa209.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17948768002:android:baed30bbfd131a73e6341b",
+        "android_client_info": {
+          "package_name": "com.e.mood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "17948768002-qpamtu4n2v9c80oe2m9ajmne3q3kfh7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdV1U8aaqhC5IrMNcM6_WODPQ5cIFI6LA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "17948768002-qpamtu4n2v9c80oe2m9ajmne3q3kfh7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
