@@ -1,10 +1,12 @@
 package com.e.mood.view.ui.activity
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -15,8 +17,9 @@ import com.e.mood.view.ui.util.ViewPagerAdapter
 import com.e.mood.viewmodel.MainActivityViewModel
 import com.e.mood.viewmodel.ViewModelProviderFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseUser
 
-class MainActivity : AppCompatActivity() {
+class MainActivity() : AppCompatActivity() {
 
     private lateinit var bottomNavView: BottomNavigationView
     private lateinit var viewModel: MainActivityViewModel
@@ -112,6 +115,8 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+
+
 
     override fun onBackPressed() {
         super.onBackPressed()

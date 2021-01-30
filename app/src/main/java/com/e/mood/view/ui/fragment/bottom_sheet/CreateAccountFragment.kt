@@ -59,6 +59,8 @@ class CreateAccountFragment : BottomSheetDialogFragment() {
 
 
         var progressDialog = ProgressDialog(context)
+
+
         viewModel.liveData.observe(this, Observer {result ->
 
             when(result){
