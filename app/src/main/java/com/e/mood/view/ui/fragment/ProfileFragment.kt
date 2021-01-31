@@ -16,6 +16,7 @@ import com.e.mood.view.ui.fragment.bottom_sheet.CreateAccountFragment
 import com.e.mood.viewmodel.ViewModelProviderFactory
 import com.e.mood.viewmodel.fragment.ProfileFragmentViewModel
 import com.google.android.material.button.MaterialButton
+import com.google.firebase.auth.FirebaseAuth
 
 
 class ProfileFragment() : Fragment() {
@@ -32,6 +33,8 @@ class ProfileFragment() : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
+
+
         return view
     }
 
@@ -42,6 +45,8 @@ class ProfileFragment() : Fragment() {
         viewModel = ViewModelProvider(this, providerFactory).get(ProfileFragmentViewModel::class.java)
 
         init()
+
+        Toast.makeText(context, FirebaseAuth.getInstance().currentUser?.uid, Toast.LENGTH_SHORT).show()
 
         signInButton.setOnClickListener {
             val mEmail: String = userEmail.editableText.toString().trim()
@@ -56,6 +61,8 @@ class ProfileFragment() : Fragment() {
         createAccount.setOnClickListener {
             createAccountBottomSheet.show(fragmentManager!!, "CREATE_ACCOUNT")
         }
+
+
     }
 
     fun init(){

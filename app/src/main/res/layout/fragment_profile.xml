@@ -69,7 +69,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/ET_profile_sign_in_email"
             android:layout_width="360dp"
             android:layout_height="65dp"
@@ -89,7 +89,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/ET_profile_sign_in_password"
             android:layout_width="360dp"
             android:layout_height="65dp"

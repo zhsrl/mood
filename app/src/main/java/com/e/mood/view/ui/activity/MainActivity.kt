@@ -17,6 +17,7 @@ import com.e.mood.view.ui.util.ViewPagerAdapter
 import com.e.mood.viewmodel.MainActivityViewModel
 import com.e.mood.viewmodel.ViewModelProviderFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class MainActivity() : AppCompatActivity() {
@@ -67,7 +68,7 @@ class MainActivity() : AppCompatActivity() {
                                 .replace(R.id.fragment_container, selectedFragment)
                                 .commit()
 
-                        item.setChecked(true)
+                        item.isChecked = true
                     }
 
                     R.id.bottom_item_catalog -> {
@@ -76,7 +77,7 @@ class MainActivity() : AppCompatActivity() {
                                 .replace(R.id.fragment_container, selectedFragment)
                                 .commit()
 
-                        item.setChecked(true)
+                        item.isChecked = true
                     }
 
                     R.id.bottom_item_bookmark -> {
@@ -86,7 +87,7 @@ class MainActivity() : AppCompatActivity() {
                                 .disallowAddToBackStack()
                                 .commit()
 
-                        item.setChecked(true)
+                        item.isChecked = true
                     }
 
                     R.id.bottom_item_shop_box -> {
@@ -100,13 +101,31 @@ class MainActivity() : AppCompatActivity() {
                     }
 
                     R.id.bottom_item_profile -> {
-                        selectedFragment = ProfileFragment()
-                        supportFragmentManager.beginTransaction()
-                                .replace(R.id.fragment_container, selectedFragment)
-                                .disallowAddToBackStack()
-                                .commit()
 
-                        item.setChecked(true)
+                        var currentUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+
+                        if(currentUser == null){
+                            selectedFragment = ProfileFragment()
+                            supportFragmentManager.beginTransaction()
+                                    .replace(R.id.fragment_container, selectedFragment)
+                                    .disallowAddToBackStack()
+                                    .commit()
+
+                            item.isChecked = true
+                        }else{
+                            val oldFragment = ProfileFragment()
+                            selectedFragment = SignedFragment()
+                            supportFragmentManager.beginTransaction()
+                                    .remove(oldFragment)
+                                    .replace(R.id.fragment_container, selectedFragment)
+                                    .disallowAddToBackStack()
+                                    .commit()
+
+                            item.isChecked = true
+                        }
+
+
+
                     }
                 }
 

@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser
 
 class ProfileFragmentViewModel(val context: Context): ViewModel() {
 
-    private val activity: MainActivity = MainActivity()
+    private var myContext = FragmentActivity()
     val liveData = MutableLiveData<State>()
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -41,10 +43,9 @@ class ProfileFragmentViewModel(val context: Context): ViewModel() {
     fun updateUI(user: FirebaseUser){
         if(user != null){
 
-//            Toast.makeText(context, "Логин успешно выполнен!", Toast.LENGTH_SHORT).show()
-
-            val selectedFragment = SignedFragment()
-//            val fragmentManager: FragmentManager = context.getFragmentManager()
+            Toast.makeText(context, "Логин успешно выполнен!", Toast.LENGTH_SHORT).show()
+//            val selectedFragment: SignedFragment = SignedFragment()
+//            val fragmentManager: FragmentManager = myContext.supportFragmentManager
 //            fragmentManager.beginTransaction()
 //                    .replace(R.id.fragment_container, selectedFragment)
 //                    .disallowAddToBackStack()
