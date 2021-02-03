@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.e.mood.R
 import com.e.mood.view.ui.activity.MainActivity
+import com.e.mood.view.ui.fragment.ProfileFragment
 import com.e.mood.view.ui.fragment.SignedFragment
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -31,6 +32,8 @@ class ProfileFragmentViewModel(val context: Context): ViewModel() {
                         if(p0.isSuccessful){
                             val currentUser: FirebaseUser = mAuth.currentUser!!
 
+
+
                             updateUI(currentUser)
 
                         }else{
@@ -44,12 +47,15 @@ class ProfileFragmentViewModel(val context: Context): ViewModel() {
         if(user != null){
 
             Toast.makeText(context, "Логин успешно выполнен!", Toast.LENGTH_SHORT).show()
-//            val selectedFragment: SignedFragment = SignedFragment()
-//            val fragmentManager: FragmentManager = myContext.supportFragmentManager
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.fragment_container, selectedFragment)
-//                    .disallowAddToBackStack()
-//                    .commit()
+            val selectedFragment: SignedFragment = SignedFragment()
+
+            val fragmentManager: FragmentManager = myContext.supportFragmentManager
+
+            fragmentManager.beginTransaction()
+                    .remove(ProfileFragment())
+                    .add(R.id.fragment_container, selectedFragment)
+                    .commit()
+
         }else{
 //            Toast.makeText(context,"Что-то пошло не так...", Toast.LENGTH_SHORT).show()
         }

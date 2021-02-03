@@ -1,17 +1,20 @@
 package com.e.mood.view.ui.activity
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.Window
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.mood.R
 import com.e.mood.view.ui.fragment.*
+import com.e.mood.view.ui.fragment.bottom_sheet.SignInBottomFragment
 import com.e.mood.view.ui.util.Pager
 import com.e.mood.view.ui.util.ViewPagerAdapter
 import com.e.mood.viewmodel.MainActivityViewModel
@@ -23,6 +26,8 @@ import com.google.firebase.auth.FirebaseUser
 class MainActivity() : AppCompatActivity() {
 
     private lateinit var bottomNavView: BottomNavigationView
+    private lateinit var profileIV: ImageView
+
     private lateinit var viewModel: MainActivityViewModel
 
     private var fragmentList: MutableList<Fragment> = ArrayList()
@@ -33,6 +38,11 @@ class MainActivity() : AppCompatActivity() {
 
 //        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         bottomNavView = findViewById(R.id.MAIN_bottom_nav_view)
+        profileIV = findViewById(R.id.IV_profile)
+        profileIV.setOnClickListener{
+            val intent = Intent(applicationContext, ProfileActivity::class.java)
+            startActivity(intent)
+        }
 
         val providerFactory = ViewModelProviderFactory(this)
         viewModel = ViewModelProvider(this, providerFactory).get(MainActivityViewModel::class.java)
@@ -101,28 +111,25 @@ class MainActivity() : AppCompatActivity() {
                     }
 
                     R.id.bottom_item_profile -> {
+                        val user = FirebaseAuth.getInstance().currentUser
+                        val signInBottomSheet: SignInBottomFragment = SignInBottomFragment()
 
-                        var currentUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+                        if(user != null){
 
-                        if(currentUser == null){
+
+
                             selectedFragment = ProfileFragment()
                             supportFragmentManager.beginTransaction()
                                     .replace(R.id.fragment_container, selectedFragment)
                                     .disallowAddToBackStack()
                                     .commit()
 
-                            item.isChecked = true
+                            item.setChecked(true)
                         }else{
-                            val oldFragment = ProfileFragment()
-                            selectedFragment = SignedFragment()
-                            supportFragmentManager.beginTransaction()
-                                    .remove(oldFragment)
-                                    .replace(R.id.fragment_container, selectedFragment)
-                                    .disallowAddToBackStack()
-                                    .commit()
-
-                            item.isChecked = true
+                            signInBottomSheet.show(supportFragmentManager, "SIGN_IN")
                         }
+
+
 
 
 

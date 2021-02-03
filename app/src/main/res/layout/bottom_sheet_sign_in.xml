@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ui.fragment.ProfileFragment">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="Войти"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="с помощью аккаунта"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Mood"
+            android:textColor="@color/main_color"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/textView" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+            <EditText
+                android:id="@+id/ET_bottom_sheet_sign_in_email"
+                android:layout_width="360dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+            <EditText
+                android:id="@+id/ET_bottom_sheet_sign_in_password"
+                android:layout_width="360dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Я не помню пароль"
+            android:textColor="@color/main_color"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/BTN_bottom_sheet_sign_in"
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/main_color"
+            android:text="Войти"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:cornerRadius="6dp"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/TV_create_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Создайте аккаунт"
+            android:textColor="@color/main_color"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/BTN_bottom_sheet_sign_in"
+            app:layout_constraintTop_toBottomOf="@+id/BTN_bottom_sheet_sign_in" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="или войдите через соцсети"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/TV_create_account"
+            app:layout_constraintTop_toTopOf="@+id/TV_create_account" />
+
+        <ImageView
+            android:id="@+id/IV_google"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/google"
+            app:layout_constraintStart_toStartOf="@+id/TV_create_account"
+            app:layout_constraintTop_toBottomOf="@+id/TV_create_account" />
+
+        <ImageView
+            android:id="@+id/IV_facebook"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="24dp"
+            android:src="@drawable/facebook"
+            app:layout_constraintBottom_toBottomOf="@+id/IV_google"
+            app:layout_constraintStart_toEndOf="@+id/IV_google"
+            app:layout_constraintTop_toTopOf="@+id/IV_google" />
+
+        <ImageView
+            android:id="@+id/IV_twitter"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="24dp"
+            android:src="@drawable/twitter"
+            app:layout_constraintBottom_toBottomOf="@+id/IV_facebook"
+            app:layout_constraintStart_toEndOf="@+id/IV_facebook"
+            app:layout_constraintTop_toTopOf="@+id/IV_facebook" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
