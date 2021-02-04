@@ -43,7 +43,7 @@ class CreateAccountViewModel(val context: Context): ViewModel() {
                                         Toast.makeText(context, "Регистрация прошла успешно!", Toast.LENGTH_SHORT).show()
 
                                         // Checking variable for dismiss Bottom Sheet Layout
-                                        isSuccess = true
+                                        liveData.postValue(State.Result(true))
 
 
                                     }else{
@@ -69,5 +69,6 @@ class CreateAccountViewModel(val context: Context): ViewModel() {
     sealed class State(){
         object HideLoading: State()
         object ShowLoading: State()
+        data class Result(var isSuccess: Boolean): State()
     }
 }

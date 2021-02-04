@@ -1,6 +1,7 @@
 package com.e.mood.view.ui.fragment.bottom_sheet
 
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +11,16 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.e.mood.R
+import com.e.mood.view.ui.fragment.ProfileFragment
 import com.e.mood.viewmodel.ViewModelProviderFactory
 import com.e.mood.viewmodel.bottom_sheet.SignInViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
+import java.util.*
 
 class SignInBottomFragment: BottomSheetDialogFragment() {
 
@@ -47,14 +52,39 @@ class SignInBottomFragment: BottomSheetDialogFragment() {
         init()
 
         signInButton.setOnClickListener {
-            var mEmail: String = userEmail.editableText.toString().trim()
-            var mPassword: String = userPassword.editableText.toString().trim()
+            val mEmail: String = userEmail.editableText.toString().trim()
+            val mPassword: String = userPassword.editableText.toString().trim()
 
             viewModel!!.signInUser(mEmail, mPassword)
         }
         signUp.setOnClickListener {
             createAccount.show(fragmentManager!!, "CREATE_ACCOUNT")
         }
+
+        val progressDialog = ProgressDialog(context)
+
+        viewModel!!.liveData.observe(this, androidx.lifecycle.Observer {
+            when(it){
+                is SignInViewModel.State.HideLoading -> {
+                    progressDialog.dismiss()
+                }
+                is SignInViewModel.State.ShowLoading -> {
+                    progressDialog.show()
+                    progressDialog.setContentView(R.layout.progress_dialog)
+                }
+                is SignInViewModel.State.Result -> {
+                    dismiss()
+                    progressDialog.dismiss()
+
+                    fragmentManager!!.beginTransaction()
+                            .replace(R.id.fragment_container, ProfileFragment())
+                            .disallowAddToBackStack()
+                            .commit()
+
+
+                }
+            }
+        })
 
     }
 

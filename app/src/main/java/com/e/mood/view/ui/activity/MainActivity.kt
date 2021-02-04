@@ -127,6 +127,8 @@ class MainActivity() : AppCompatActivity() {
                             item.setChecked(true)
                         }else{
                             signInBottomSheet.show(supportFragmentManager, "SIGN_IN")
+
+                            item.isChecked = true
                         }
 
 
@@ -142,7 +144,9 @@ class MainActivity() : AppCompatActivity() {
 
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()

@@ -14,35 +14,34 @@ import com.google.firebase.auth.FirebaseUser
 
 class SignInViewModel(val context: Context): ViewModel() {
 
-    private val liveData = MutableLiveData<State>()
+    val liveData = MutableLiveData<State>()
     private val sheet = SignInBottomFragment()
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     fun signInUser(email: String, password: String){
+        liveData.value = State.ShowLoading
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(object : OnCompleteListener<AuthResult>{
                     override fun onComplete(p0: Task<AuthResult>) {
                         if(p0.isSuccessful){
-                            val user: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
-                            updateUI(user)
+                            liveData.value = State.HideLoading
 
+                            val user: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+                            Toast.makeText(context, "Успешно вошли в систему!", Toast.LENGTH_SHORT).show()
+                            liveData.postValue(State.Result(true))
                         }else{
+                            liveData.value = State.HideLoading
                             Toast.makeText(context, p0.exception.toString(), Toast.LENGTH_SHORT).show()
                         }
                     }
                 })
     }
 
-    fun updateUI(user: FirebaseUser){
-        if(user != null){
-        }else{
-            Toast.makeText(context, "Didnt signed!", Toast.LENGTH_SHORT).show()
-        }
-    }
 
 
     sealed class State{
         object HideLoading: State()
         object ShowLoading: State()
+        data class Result(val isSuccess: Boolean): State()
     }
 }

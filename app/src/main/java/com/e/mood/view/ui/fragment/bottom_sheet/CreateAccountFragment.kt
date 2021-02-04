@@ -58,7 +58,7 @@ class CreateAccountFragment : BottomSheetDialogFragment() {
         }
 
 
-        var progressDialog = ProgressDialog(context)
+        val progressDialog = ProgressDialog(context)
 
 
         viewModel.liveData.observe(this, Observer {result ->
@@ -71,6 +71,10 @@ class CreateAccountFragment : BottomSheetDialogFragment() {
 
                 is CreateAccountViewModel.State.HideLoading -> {
                     progressDialog.dismiss()
+                }
+
+                is CreateAccountViewModel.State.Result -> {
+                    dismiss()
                 }
 
             }

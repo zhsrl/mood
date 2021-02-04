@@ -21,49 +21,18 @@ import com.google.firebase.auth.FirebaseUser
 
 class ProfileFragmentViewModel(val context: Context): ViewModel() {
 
-    private var myContext = FragmentActivity()
     val liveData = MutableLiveData<State>()
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    fun signInUser(email: String, password: String){
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(object : OnCompleteListener<AuthResult>{
-                    override fun onComplete(p0: Task<AuthResult>) {
-                        if(p0.isSuccessful){
-                            val currentUser: FirebaseUser = mAuth.currentUser!!
 
-
-
-                            updateUI(currentUser)
-
-                        }else{
-                            Log.e("AUTH_ERROR", p0.exception.toString())
-                        }
-                    }
-                })
-    }
-
-    fun updateUI(user: FirebaseUser){
-        if(user != null){
-
-            Toast.makeText(context, "Логин успешно выполнен!", Toast.LENGTH_SHORT).show()
-            val selectedFragment: SignedFragment = SignedFragment()
-
-            val fragmentManager: FragmentManager = myContext.supportFragmentManager
-
-            fragmentManager.beginTransaction()
-                    .remove(ProfileFragment())
-                    .add(R.id.fragment_container, selectedFragment)
-                    .commit()
-
-        }else{
-//            Toast.makeText(context,"Что-то пошло не так...", Toast.LENGTH_SHORT).show()
-        }
+    fun signOutUser(){
+        liveData.value = State.ShowLoading
+        mAuth.signOut()
+        liveData.value = State.HideLoading
     }
 
 
-
-    sealed class State(){
+    sealed class State{
         object ShowLoading: State()
         object HideLoading: State()
     }
