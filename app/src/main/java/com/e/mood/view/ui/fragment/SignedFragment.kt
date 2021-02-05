@@ -1,6 +1,8 @@
 package com.e.mood.view.ui.fragment
 
+import android.app.ProgressDialog
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +31,25 @@ class SignedFragment : Fragment() {
 
         signOut.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
+
+            var handler: Handler = Handler()
+            val progressDialog = ProgressDialog(context)
+
+
+            progressDialog.show()
+            progressDialog.setContentView(R.layout.progress_dialog)
+            handler.postDelayed(Runnable {
+
+                kotlin.run {
+                    fragmentManager!!.beginTransaction()
+                        .detach(SignedFragment())
+                        .replace(R.id.fragment_container, ProfileFragment())
+                        .commit()
+
+                    progressDialog.dismiss()
+                }
+            }, 3000)
+
         }
     }
 

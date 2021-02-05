@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseUser
 class MainActivity() : AppCompatActivity() {
 
     private lateinit var bottomNavView: BottomNavigationView
-    private lateinit var profileIV: ImageView
+
 
     private lateinit var viewModel: MainActivityViewModel
 
@@ -38,11 +38,7 @@ class MainActivity() : AppCompatActivity() {
 
 //        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         bottomNavView = findViewById(R.id.MAIN_bottom_nav_view)
-        profileIV = findViewById(R.id.IV_profile)
-        profileIV.setOnClickListener{
-            val intent = Intent(applicationContext, ProfileActivity::class.java)
-            startActivity(intent)
-        }
+
 
         val providerFactory = ViewModelProviderFactory(this)
         viewModel = ViewModelProvider(this, providerFactory).get(MainActivityViewModel::class.java)
@@ -112,27 +108,34 @@ class MainActivity() : AppCompatActivity() {
 
                     R.id.bottom_item_profile -> {
                         val user = FirebaseAuth.getInstance().currentUser
-                        val signInBottomSheet: SignInBottomFragment = SignInBottomFragment()
+                        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
                         if(user != null){
-
-
-
-                            selectedFragment = ProfileFragment()
-                            supportFragmentManager.beginTransaction()
-                                    .replace(R.id.fragment_container, selectedFragment)
+                            if(fragment == ProfileFragment()){
+                                supportFragmentManager.beginTransaction()
+                                    .detach(ProfileFragment())
+                                    .replace(R.id.fragment_container, SignedFragment())
                                     .disallowAddToBackStack()
                                     .commit()
 
-                            item.setChecked(true)
+                                item.isChecked = true
+                            }else{
+                                supportFragmentManager.beginTransaction()
+                                    .replace(R.id.fragment_container, SignedFragment())
+                                    .disallowAddToBackStack()
+                                    .commit()
+
+                                item.isChecked = true
+                            }
+
                         }else{
-                            signInBottomSheet.show(supportFragmentManager, "SIGN_IN")
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, ProfileFragment())
+                                .disallowAddToBackStack()
+                                .commit()
 
                             item.isChecked = true
                         }
-
-
-
 
 
                     }
@@ -142,10 +145,6 @@ class MainActivity() : AppCompatActivity() {
             }
         })
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     override fun onBackPressed() {

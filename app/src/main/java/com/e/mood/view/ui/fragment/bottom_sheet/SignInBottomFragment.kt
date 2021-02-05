@@ -3,15 +3,19 @@ package com.e.mood.view.ui.fragment.bottom_sheet
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.mood.R
 import com.e.mood.view.ui.fragment.ProfileFragment
+import com.e.mood.view.ui.fragment.SignedFragment
 import com.e.mood.viewmodel.ViewModelProviderFactory
 import com.e.mood.viewmodel.bottom_sheet.SignInViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
@@ -76,12 +80,6 @@ class SignInBottomFragment: BottomSheetDialogFragment() {
                     dismiss()
                     progressDialog.dismiss()
 
-                    fragmentManager!!.beginTransaction()
-                            .replace(R.id.fragment_container, ProfileFragment())
-                            .disallowAddToBackStack()
-                            .commit()
-
-
                 }
             }
         })
@@ -116,5 +114,18 @@ class SignInBottomFragment: BottomSheetDialogFragment() {
         userPassword = view!!.findViewById(R.id.ET_bottom_sheet_sign_in_password)
         signInButton = view!!.findViewById(R.id.BTN_bottom_sheet_sign_in)
         signUp = view!!.findViewById(R.id.TV_create_account)
+    }
+
+    fun getFm(){
+        val fragment: Fragment? = fragmentManager!!.findFragmentById(R.id.fragment_container)
+        if(fragment == ProfileFragment()){
+            fragmentManager!!.beginTransaction()
+                .detach(ProfileFragment())
+                .replace(R.id.fragment_container, SignedFragment())
+                .commit()
+        }else{
+            Toast.makeText(context, "DDD", Toast.LENGTH_SHORT).show()
+        }
+
     }
 }

@@ -22,14 +22,14 @@ import com.e.mood.viewmodel.ViewModelProviderFactory
 import com.e.mood.viewmodel.fragment.ProfileFragmentViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 
 class ProfileFragment() : Fragment() {
 
-    lateinit var signOut: Button
 
     private var handler: Handler = Handler()
-
+    private lateinit var signIn: MaterialButton
     private lateinit var viewModel: ProfileFragmentViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -47,38 +47,66 @@ class ProfileFragment() : Fragment() {
         val providerFactory = ViewModelProviderFactory(context!!)
         viewModel = ViewModelProvider(this, providerFactory).get(ProfileFragmentViewModel::class.java)
 
-        signOut = view!!.findViewById(R.id.BTN_profile_sign_out)
+        signIn = view!!.findViewById(R.id.BTN_profile_sign_in)
+        val signInBottomSheet: SignInBottomFragment = SignInBottomFragment()
 
-        signOut.setOnClickListener {
-            viewModel.signOutUser()
+        signIn.setOnClickListener {
+
+            signInBottomSheet.show(fragmentManager!!, "SIGN_IN")
         }
 
+        val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+
+        val progressDialog = ProgressDialog(context!!)
 
 
-        viewModel.liveData.observe(this, Observer {
-            val progressDialog = ProgressDialog(context)
+        handler.postDelayed(Runnable {
 
-            when(it){
-                is ProfileFragmentViewModel.State.HideLoading -> {
-                    progressDialog.dismiss()
-                }
-                is ProfileFragmentViewModel.State.ShowLoading -> {
+            if(user != null){
 
-                    handler.postDelayed(Runnable {
-                        kotlin.run {
-                            progressDialog.show()
-                            progressDialog.setContentView(R.layout.progress_dialog)
+                progressDialog.show()
+                progressDialog.setContentView(R.layout.progress_dialog)
 
-                            val signInBottomSheet: SignInBottomFragment = SignInBottomFragment()
-                            signInBottomSheet.show(fragmentManager!!, "SIGN_IN")
-                        }
-                    }, 2000)
-                }
+                fragmentManager!!.beginTransaction()
+                    .detach(ProfileFragment())
+                    .replace(R.id.fragment_container, SignedFragment())
+                    .disallowAddToBackStack()
+                    .commit()
+
+                progressDialog.dismiss()
             }
-        })
+
+        }, 2000)
 
 
 
+
+
+
+//        viewModel.liveData.observe(this, Observer {
+////            val progressDialog = ProgressDialog(context)
+////
+////            when(it){
+////                is ProfileFragmentViewModel.State.HideLoading -> {
+////                    progressDialog.dismiss()
+////                }
+////                is ProfileFragmentViewModel.State.ShowLoading -> {
+////
+////                    handler.postDelayed(Runnable {
+////                        kotlin.run {
+////                            progressDialog.show()
+////                            progressDialog.setContentView(R.layout.progress_dialog)
+////
+////                            val signInBottomSheet: SignInBottomFragment = SignInBottomFragment()
+////                            signInBottomSheet.show(fragmentManager!!, "SIGN_IN")
+////                        }
+////                    }, 2000)
+////                }
+////            }
+////        })
+//
+//
+//        }
 
     }
 

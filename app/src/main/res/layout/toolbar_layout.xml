@@ -12,14 +12,4 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <ImageView
-        android:id="@+id/IV_profile"
-        android:layout_gravity="right"
-        android:layout_marginTop="18dp"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/ic_user"
-        android:layout_width="20dp"
-        android:layout_height="20dp"/>
-
-
 </FrameLayout>
