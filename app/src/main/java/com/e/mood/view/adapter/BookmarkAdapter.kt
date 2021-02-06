@@ -50,6 +50,8 @@ class BookmarkAdapter(val productList: List<Product>): RecyclerView.Adapter<Book
 
     override fun onBindViewHolder(holder: BookmarkAdapter.ViewHolder, position: Int) {
         holder.bind(productList[position])
+
+
     }
 
     override fun getItemCount(): Int {

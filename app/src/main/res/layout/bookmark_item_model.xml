@@ -2,14 +2,15 @@
 <LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_width="390dp"
+        android:layout_height="200dp"
+        app:cardElevation="5dp"
+        android:layout_margin="10dp"
         app:cardCornerRadius="5dp"
         >
 
@@ -46,7 +47,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="Product name"
                     android:textColor="@color/black"
-                    android:textSize="17sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,9 +56,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:textSize="16sp"
                     android:text="Product Description"
                     android:textColor="@color/black"
-                    android:fontFamily="sans-serif-light"
+
                     app:layout_constraintStart_toStartOf="@+id/TV_bookmark_item_model_product_name"
                     app:layout_constraintTop_toBottomOf="@+id/TV_bookmark_item_model_product_name" />
 
@@ -66,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="sans-serif-light"
+
                     android:text="39, 40, 42, 44"
                     app:layout_constraintStart_toStartOf="@+id/TV_bookmark_item_model_product_description"
                     app:layout_constraintTop_toBottomOf="@+id/TV_bookmark_item_model_product_description" />
@@ -86,10 +88,6 @@
 
 
         </LinearLayout>
-
-
-
-
 
     </androidx.cardview.widget.CardView>
 
