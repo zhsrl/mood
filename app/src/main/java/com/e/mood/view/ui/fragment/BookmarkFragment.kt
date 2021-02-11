@@ -67,12 +67,19 @@ class BookmarkFragment : Fragment() {
                 "Кроссовки GEL-KUMO LYTE 2",
                 arrayListOf("35", "36", "41"))
 
+        val p7: Product = Product(R.drawable.sneak2,
+                "NIKE EL Edition",
+                "Кроссовки NIKE EL EDITION",
+                arrayListOf("40", "42")
+                )
+
         product.add(p1)
         product.add(p2)
         product.add(p3)
         product.add(p4)
         product.add(p5)
         product.add(p6)
+        product.add(p7)
 
         return product
     }
